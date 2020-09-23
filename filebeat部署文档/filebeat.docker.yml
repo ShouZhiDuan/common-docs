@@ -1,0 +1,45 @@
+filebeat.inputs:
+
+- type: log
+
+  enabled: true
+  ##配置你要收集的日志目录，可以配置多个目录
+  paths:
+    - /filebeat/log/node.INFO
+
+  include_lines: ['[[USER]]']
+
+
+processors:
+  - drop_fields:
+      when:
+        has_fields:  ['log_source']
+      fields: ["input","@timestamp","@metadata","ecs","host","agent","log"]
+
+
+##配置多行日志合并规则，已时间为准，一个时间发生的日志为一个事件
+#multiline.pattern: '^\d{4}-\d{2}-\d{2}-\d{3}'
+#multiline.pattern: "dsz"
+#multiline.max_lines: 50
+#multiline.timeout: 10
+#multiline.negate: false
+#multiline.match: before
+
+
+fields:
+   log_source: skadi
+
+fields_under_root: true
+
+
+#控制台打印,本地调试可以打开，注意7.x后只支持配置一个output节点
+#output.file:
+  #path: "/tmp/filebeat"
+  #filename: filebeat
+
+
+
+output.redis:
+  hosts: ["redis:6379"]
+  key: skadi_log
+  db: 0

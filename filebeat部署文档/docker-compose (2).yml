@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+    filebeat:
+        env_file: 
+          - .env 
+        user: root
+        container_name: filebeat
+        image: docker.elastic.co/beats/filebeat:7.7.1
+        restart: always
+        volumes:
+          - ${filebeat_yml_volume}:/usr/share/filebeat/filebeat.yml
+          - ${log_volume}:/filebeat/log/node.INFO
+          - ${filebeat_registry_volume}:/usr/share/filebeat/data/registry
+        networks:
+          - localnet
+        depends_on:
+          - redis
+
+
+    redis:
+        user: root
+        container_name: redis
+        image: redis:latest
+        restart: always
+        ports:
+          - ${redis_port}:6379
+        command: redis-server /etc/conf/redis.conf
+        volumes:
+          - ${redis_data_volume}:/data
+          - ${redis_conf_volume}:/etc/conf
+        privileged: true
+        networks:
+          - localnet
+        environment:
+          - TZ=Asia/Shanghai
+          - LANG=en_US.UTF-8
+          
+#创建docker共享网络
+networks:
+    localnet:
+       external:
+         name: localnet
+         
+         
+         
+         
+         
