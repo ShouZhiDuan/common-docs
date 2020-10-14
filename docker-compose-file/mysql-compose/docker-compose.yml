@@ -1,5 +1,5 @@
 version: '3.7'
-
+# to see https://www.jb51.net/article/169141.htm 开启mysql远程连接命令
 services:
   mysql:
     image: mysql
@@ -14,4 +14,5 @@ services:
     ports:
       - "3306:3306"
     restart: always
-    command: --default-authentication-plugin=caching_sha2_password #这行代码解决无法访问的问题
+    command: --default-authentication-plugin=mysql_native_password #这行代码解决无法访问的问题
+    
