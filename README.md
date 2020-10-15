@@ -3,7 +3,7 @@
 
 ## 2、[docker-compose部署Mysql](https://github.com/ShouZhiDuan/common-docs/tree/master/docker-compose-file/mysql-compose)
 
-## 3、[docker-compose部署filebeat日志上报系统]([https://github.com/ShouZhiDuan/common-docs/tree/master/filebeat%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3](https://github.com/ShouZhiDuan/common-docs/tree/master/filebeat部署文档))
+## 3、[docker-compose部署filebeat日志上报系统](https://github.com/ShouZhiDuan/common-docs/tree/master/filebeat-deploy)
 
 ## 4、[docker-compose部署promethus和grafna服务器监控系统](https://github.com/ShouZhiDuan/common-docs/tree/master/docker-compose-file/promethus-grafna-nodeexport-cadvisor-compose)
 
