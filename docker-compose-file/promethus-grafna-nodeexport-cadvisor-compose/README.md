@@ -209,3 +209,12 @@ docker run                                    \
 google/cadvisor:latest
 ```
 
+## 4、[常用的Grafna支持Promethus插件编号](https://grafana.com/grafana/dashboards)
+
+```properties
+1、主机资源监控插件 
+https://grafana.com/grafana/dashboards/8919
+2、Dcoker容器资源监控插件
+10956、11558、6756、315、893
+```
+
