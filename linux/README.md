@@ -14,3 +14,10 @@ history [-raw] histfiles
 -w 将目前history记忆的内容写入到histfiles
 ```
 
+## 2、防火墙开启重启
+
+```properties
+开启:firewall-cmd --zone=public --add-port=10880/tcp --permanent
+重启:firewall-cmd --reload
+```
+
