@@ -21,3 +21,15 @@ history [-raw] histfiles
 重启:firewall-cmd --reload
 ```
 
+## 3、远程登录
+
+```tex
+ssh -i keyfile user@IP
+
+字段解释：
+keyfile:当前登录需要的证书
+user:当前登录的用户
+IP:当前登录的服务器IP
+注意：有时候执行完ssh -i keyfile user@IP还会输入密码。
+```
+
