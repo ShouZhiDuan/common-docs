@@ -13,5 +13,4 @@
 支持警报邮件发送通知
 ```
 
-## 5、常用脚本
-
+## 5、[常用脚本](https://github.com/ShouZhiDuan/common-docs/tree/master/shell-script)
