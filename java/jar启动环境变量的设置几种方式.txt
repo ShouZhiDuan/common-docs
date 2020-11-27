@@ -1,0 +1,22 @@
+一、通过设置服务器环境变量
+1、常见的jdk环境变量
+export JAVA_HOME=/usr/local/hk/tomcat/jdk1.8.0_121;
+export PATH=$JAVA_HOME/bin:$PATH;
+export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar;
+java -jar test.jar   这样在我们java系统程序中就可以获取相应的JAVA_HOME、PATH、CLASSPATH这几个值了。
+
+
+二、-DpropName=propValue
+java -jar -DdatabaseUrl="mysql://localhost:3306/pdb?user=root&password=root"  -Dapp.key="123" -Dapp.secret="xxx"  demo.jar
+
+三、参数直接跟在命令后面，多个参数之间用空格隔开
+(这种方式参数就是jar包里主启动类中main方法的args参数，按顺序来)
+java -jar demo.jar log.txt processType=1
+
+
+四、使用springboot的方式，--propName=propValue方式  
+(但是这个必须是springboot内置的一些参数、不能自定义。但是要是自定义就只能自己逻辑中用，springboot自身不会用)
+java -jar demo.jar  --spring.profiles.active=dev  --server.port=8181
+
+
+
