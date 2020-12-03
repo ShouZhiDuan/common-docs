@@ -33,3 +33,13 @@ IP:当前登录的服务器IP
 注意：有时候执行完ssh -i keyfile user@IP还会输入密码。
 ```
 
+## 4、[Docker bash: ping: command not found](https://www.cnblogs.com/ccielife/p/10921907.html)
+
+```
+apt-get update
+
+apt install iputils-ping
+
+apt install net-tools
+```
+
