@@ -1,0 +1,122 @@
+to see https://blog.csdn.net/qq_39004843/article/details/106100870
+1.首先查看防火墙状态：
+systemctl status firewalld
+开启防火墙并设置开机自启 （服务器可能需要重启一下）
+systemctl start firewalld
+systemctl enable firewalld
+
+
+2. 开放端口
+例如：开启XShell连接时需要使用的22端口
+firewall-cmd --zone=public --add-port=22/tcp --permanent  |  --permanent的作用是使设置永久生效，不加的话机器重启之后失效
+firewall-cmd --reload        | 重载防火墙设置，使设置生效
+firewall-cmd --zone=public --query-port=22/tcp | 查看22端口是否开启
+firewall-cmd --zone=public --list-ports     | 查看当前系统开启的所有端口
+
+3. 限制端口
+firewall-cmd --zone=public --remove-port=6379/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --zone=public --list-ports   | 查看开启的所有端口
+
+4. 批量开启或限制端口
+
+批量打开1000-2000之间的所有端口
+firewall-cmd --zone=public --add-port=1000-2000/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --zone=public --list-ports   | 查看开启的所有端口
+
+批量限制端口1000-2000
+firewall-cmd --zone=public --remove-port=1000-2000/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --zone=public --list-ports   | 查看开启的所有端口
+
+5.限制IP地址访问
+限制IP为192.168.0.100的地址禁止访问80端口即禁止访问机器
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="192.168.0.100" port protocol="tcp" port="80" reject"
+firewall-cmd --reload
+firewall-cmd --zone=public --list-rich-rules  |  查看已经设置的规则
+
+
+6.解除IP地址限制
+解除限制IP为192.168.0.100
+方法一
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="192.168.0.100" port protocol="tcp" port="80" accept"
+firewall-cmd --reload
+firewall-cmd --zone=public --list-rich-rules  |  查看已经设置的规则
+如设置未生效，可尝试直接编辑规则文件，删掉原来的设置规则，重新载入一下防火墙即可
+vi /etc/firewalld/zones/public.xml
+方法二 （推荐直接remove之前添加的规则）
+firewall-cmd --permanent --remove-rich-rule="rule family="ipv4" source address="192.168.0.100" port protocol="tcp" port="80" accept"
+记得重新载入一下才会生效：firewall-cmd --reload
+
+
+7.限制IP地址段
+例子：
+如我们需要限制10.0.0.0-10.0.0.255这一整个段的IP访问
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.0.0.0/24" port protocol="tcp" port="80" reject"
+firewall-cmd --reload
+firewall-cmd --zone=public --list-rich-rules   |  查看已经设置的规则
+
+
+
+
+8. 打开被限制为IP地址段
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.0.0.0/24" port protocol="tcp" port="80" accept"
+
+firewall-cmd --reload   
+
+firewall-cmd --zone=public --list-rich-rules   |  查看已经设置的规则
+
+
+通过/etc/hosts 来限制IP
+示例1： 只允许192.168.0.222登录192.168.1.81
+vim /etc/hosts.allow  | 终端打开
+最后一行加入：
+sshd:192.168.0.222:allow        | 多个IP可以按照此格式写多行
+vim /etc/hosts.deny
+最后一行加入：
+sshd:ALL            |除了上面允许登录的IP，其它IP都拒绝登录
+最后重载一下
+service sshd restart
+
+
+示例2： 只允许192.168.1网段的主机登录192.168.1.81
+####vim /etc/hosts.allow，最后一行加入：
+sshd:192.168.1.*:allow  |  vim /etc/hosts.allow 打开并输入
+sshd:ALL | vim /etc/hosts.deny 打开并输入
+service sshd restart
+
+
+
+示例3： 只允许192.168.0.222以keyso用户身份、192.168.1.135以root用户身份登录192.168.1.81
+vim /etc/ssh/sshd_config
+最后一行加入：
+AllowUsers keyso@192.168.0.222 root@192.168.1.135    | 多个用户名@IP之间使用空格分隔
+最后重载 
+service sshd restart 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
