@@ -1,0 +1,38 @@
+1、查到容器在宿主机进程号
+[root@localhost /]# docker container top blockchain-sdk
+
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                20580               20561               9                   17:01               ?                   00:10:19            java -jar /app.jar
+
+2、找出进程的top详情
+ top -p 20580
+
+top - 18:56:50 up 16 days, 17:46,  2 users,  load average: 0.35, 0.32, 0.32
+Tasks:   1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.6 us,  1.8 sy,  0.0 ni, 95.4 id,  0.0 wa,  0.0 hi,  0.1 si,  0.0 st
+KiB Mem : 16265908 total,   880744 free, 11545940 used,  3839224 buff/cache
+KiB Swap:  8257532 total,   838460 free,  7419072 used.  4372316 avail Mem 
+
+  PID       USER      PR    NI     VIRT       RES          SHR S     %CPU    %MEM      TIME+        COMMAND                                                                                                                                                         
+20580     root        20     0      9.8g     970492     15508 S     7.3           6.0          10:31.48         java  
+
+PID：进程的ID
+USER：进程所有者
+PR：进程的优先级别，越小越优先被执行
+NInice：值
+VIRT：进程占用的虚拟内存
+RES：进程占用的物理内存
+SHR：进程使用的共享内存
+S：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数
+%CPU：进程占用CPU的使用率
+%MEM：进程使用的物理内存和总内存的百分比
+TIME+：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。
+COMMAND：进程启动命令名称
+
+
+3、pmap -d 20580 
+mapped: 10316792K    writeable/private: 1689032K    shared: 2304K
+
+4、[root@localhost /]# ps -e -o 'pid,comm,args,pcpu,rsz,vsz,stime,user,uid' | grep 20580
+ 7589    grep           grep --color=auto     20580       0.0       972             112812        19:00    root      0
+ 20580  java            java -jar /app.jar                         9.1       932832     10316788       17:01   root       0
