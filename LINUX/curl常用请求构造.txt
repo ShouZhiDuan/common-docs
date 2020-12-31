@@ -1,0 +1,31 @@
+使用 curl 发送 POST 请求的四种方式:
+
+1、application/x-www-form-urlencoded
+curl localhost:3000/api/basic -X POST -d 'hello=world'
+
+
+
+2、multipart/form-data(一般文件上传)
+curl localhost:3000/api/multipart -F raw=@raw.data -F hello=world
+
+
+
+3、application/json(跟发起 application/x-www-form-urlencoded 类型的 POST 请求类似，-d 参数值是 JSON 字符串，并且多了一个 Content-Type: application/json 指定发送内容的格式。)
+curl http://192.168.10.10:1092/wegene/queryWegene \
+-X POST \
+-d '{"barcode":"DANONETE201091","reqId":"DA064B768EBC4BF9B1257CABE0113AE2_list","reqType":1,"uuid":"DA064B768EBC4BF9B1257CABE0113AE2"}' \
+--header "Content-Type: application/json"
+
+
+多个Header参数就用
+curl https://beta.wegene.com/_api/nvxclouds/get_sample_genotypes_by_rsids/ \
+-X POST -d \
+'{"barcode":"DANONETE201091","rsids":["RS1801131","RS675","RS492602","RS4872479","RS1801133","RS855791","RS1155563","RS17467825","RS1801394","RS9606756","RS11126936","RS2242480","RS4820268","RS6053005","RS4654748","RS2282679","RS233804","RS33972313","RS7975232","RS1256335","RS11950646","RS117153535","RS1544410","RS16846876","RS6133175","RS2209314","RS7041"]}' \
+-H "Content-Type:application/json" \
+-H "X-Partner-ID:WEGENENVXCLOUDS" \
+-H "sign:f73e754be90d0966" \
+-H "time:1609326523525" \
+-H "barcode:DANONETE201091" 
+
+
+
