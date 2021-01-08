@@ -1,0 +1,5 @@
+#记得后面redis:5.0.2加上版本，不然解压出来的image的version将会是none得重命名。下面这样就可以避免none.
+docker save -o redis.tar redis:5.0.2
+
+#解压image
+docker load < redis.tar
