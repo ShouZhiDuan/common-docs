@@ -1,0 +1,2 @@
+1、查询当前服务的连接数
+netstat -pnt | grep :80 | wc -l
