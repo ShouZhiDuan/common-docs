@@ -1,0 +1,24 @@
+1、显示maven依赖树：
+mvn dependency:tree
+
+2、显示maven依赖列表：
+mvn dependency:list
+
+3、下载依赖包的源码：
+mvn dependency:sources
+
+4、安装本地jar到本地仓库：
+mvn install:install-file \
+-Dfile=D:/taobao-sdk-java-auto-20160607.jar  \
+-DgroupId=com.ganshane.specs  \
+-DartifactId=taobao-sdk-java-auto-20160607  \
+-Dversion=1.0.0  \
+-Dpackaging=jar
+
+5、缺少依赖包，强制更新依赖命令：
+mvn clean install -e -U -Dmaven.test.skip=true
+
+
+
+
+

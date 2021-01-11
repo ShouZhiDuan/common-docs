@@ -17,6 +17,12 @@ curl http://192.168.10.10:1092/wegene/queryWegene \
 --header "Content-Type: application/json"
 
 
+curl http://127.0.0.1:8686/note/commit \
+-X POST \
+-d '{}' \
+--header "Content-Type: application/json"
+
+
 多个Header参数就用
 curl https://beta.wegene.com/_api/nvxclouds/get_sample_genotypes_by_rsids/ \
 -X POST -d \
