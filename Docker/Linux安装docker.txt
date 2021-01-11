@@ -1,0 +1,121 @@
+官网教程：https://docs.docker.com/engine/install/
+# 1.查看Linux 版本
+rpm -q centos-release
+
+# 2.查看内核版本
+uname -r
+
+
+# 3. 卸载之前安装的组件
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+
+# 4.安装yum-utils
+sudo yum install -y yum-utils
+
+
+# 5.安装yum-utils
+sudo yum-config-manager \
+    --add-repo \
+    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+#  https://download.docker.com/linux/centos/docker-ce.repo ( 上面使用阿里云的 国内比较快)
+
+# 6. 直接安装最新docker版本
+sudo yum install docker-ce docker-ce-cli containerd.io
+
+# 7. 安装完成后查看版本
+docker -v
+
+
+
+# 8. 安装完成后查看版本
+	# 8-1 列出可用版本
+	yum list docker-ce --showduplicates | sort -r
+
+	# 8-2 安装指定版本
+	sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+	如:
+	sudo yum install docker-ce-18.09.1 docker-ce-cli-18.09.1 containerd.io
+
+
+
+# 9. 应用
+	# 启动docker
+	sudo systemctl start docker
+	# 停止docker
+	systemctl stop docker
+	# 重启
+	systemctl restart docker
+	# 查看状态
+	systemctl status docker
+	# 设置开机自启动
+	systemctl enable docker
+	# 查看信息
+	docker info
+	# 查看帮助文档
+	docker --help
+	
+	
+# 9. 卸载操作
+	# 1.卸载 Docker 引擎、CLI 和容器包
+	sudo yum remove docker-ce docker-ce-cli containerd.io
+	# 2.主机上的图像、容器、卷或自定义配置文件不会自动删除。要删除所有图像、容器和卷
+	sudo rm -rf /var/lib/docker
+	# 3.必须手动删除任何编辑的配置文件。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+1、官网教程：https://docs.docker.com/compose/install/
+
+2、国内快速镜像部署 to see https://blog.csdn.net/qq1445654576/article/details/104488101/
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+docker-compose -version
