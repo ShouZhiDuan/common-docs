@@ -1,0 +1,5 @@
+1、证书连接
+ssh  -i  ./NVXClouds_Azure  login_name@65.52.185.215
+
+2、密码连接
+ssh root@192.168.50.203
