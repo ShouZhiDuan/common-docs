@@ -48,6 +48,17 @@ curl -H \
 --data '{"participleString":"测试"}' \
 http://0.0.0.0:8686/admin/queryParticipleResult  > data.json
 
+
 查询位点详情
 curl -H "Authorization:JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAMTYzLmNvbSIsInVzZXJfaWQiOjIsImVtYWlsIjoidGVzdEAxNjMuY29tIiwiZXhwIjoxNjA4NjEwNjI0fQ.6wPVmU1813LZNp4v62Y5__leNuGvzkWsac5LrVUQVP0"  \
 http://192.168.165.156:2018/api/DB/each_site/11530809
+
+
+curl http://192.168.165.156:2018/api/DB/query_hpo/ -X POST -d '{"phrase":"黄疸","user_id":"1","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAMTYzLmNvbSIsInVzZXJfaWQiOjIsImVtYWlsIjoidGVzdEAxNjMuY29tIiwiZXhwIjoxNjEwOTUzMjEyfQ.vfHqaO9PRc8d4d35MADx0rz-MX1B5Umxc7r5ypEVsZQ","username":"test@163.com"}' -H "Content-Type:application/json" -H "Authorization:JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAMTYzLmNvbSIsInVzZXJfaWQiOjIsImVtYWlsIjoidGVzdEAxNjMuY29tIiwiZXhwIjoxNjEwOTUzMjEyfQ.vfHqaO9PRc8d4d35MADx0rz-MX1B5Umxc7r5ypEVsZQ"
+
+
+
+
+
+
+
