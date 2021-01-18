@@ -34,4 +34,20 @@ curl https://beta.wegene.com/_api/nvxclouds/get_sample_genotypes_by_rsids/ \
 -H "barcode:DANONETE201091" 
 
 
+获取token
+curl -H \
+"Content-Type:application/x-www-form-urlencoded" \
+-X POST \
+--data "username=test@163.com&password=test@FDEK" \
+http://192.168.165.156:2018/api/auth
 
+
+获取位点ID
+curl -H \
+"Content-Type:application/json" -X POST \
+--data '{"participleString":"测试"}' \
+http://0.0.0.0:8686/admin/queryParticipleResult  > data.json
+
+查询位点详情
+curl -H "Authorization:JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAMTYzLmNvbSIsInVzZXJfaWQiOjIsImVtYWlsIjoidGVzdEAxNjMuY29tIiwiZXhwIjoxNjA4NjEwNjI0fQ.6wPVmU1813LZNp4v62Y5__leNuGvzkWsac5LrVUQVP0"  \
+http://192.168.165.156:2018/api/DB/each_site/11530809
