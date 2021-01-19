@@ -25,3 +25,9 @@ git reset HEAD test.java 撤销某个文件
 git reset HEAD file 撤销某个文件夹中的所有文件
 ```
 
+## 3、Git修改coomit信息
+
+```tex
+git commit --amend
+```
+
