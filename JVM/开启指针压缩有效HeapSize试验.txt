@@ -1,0 +1,2 @@
+1、试验命令
+java -Xmx32766m -XX:+PrintFlagsFinal 2> /dev/null | grep UseCompressedOops
