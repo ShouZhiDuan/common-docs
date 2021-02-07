@@ -1,0 +1,13 @@
+1、命令查看本机的初始化参数
+java -XX:+PrintFlagsInitial
+
+2、试验堆大小指针压缩命令
+java -Xmx32766m -XX:+PrintFlagsFinal 2> /dev/null | grep UseCompressedOops
+
+3、设置字符串常量池大小
+-XX:StringTableSize=10090
+
+4、设置堆大小
+-Xms3m -Xmx3m -XX:+PrintGCDetails
+
+5、
