@@ -34,6 +34,7 @@ curl https://beta.wegene.com/_api/nvxclouds/get_sample_genotypes_by_rsids/ \
 -H "barcode:DANONETE201091" 
 
 
+
 获取token
 curl -H \
 "Content-Type:application/x-www-form-urlencoded" \
@@ -55,10 +56,5 @@ http://192.168.165.156:2018/api/DB/each_site/11530809
 
 
 curl http://192.168.165.156:2018/api/DB/query_hpo/ -X POST -d '{"phrase":"黄疸","user_id":"1","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAMTYzLmNvbSIsInVzZXJfaWQiOjIsImVtYWlsIjoidGVzdEAxNjMuY29tIiwiZXhwIjoxNjEwOTUzMjEyfQ.vfHqaO9PRc8d4d35MADx0rz-MX1B5Umxc7r5ypEVsZQ","username":"test@163.com"}' -H "Content-Type:application/json" -H "Authorization:JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAMTYzLmNvbSIsInVzZXJfaWQiOjIsImVtYWlsIjoidGVzdEAxNjMuY29tIiwiZXhwIjoxNjEwOTUzMjEyfQ.vfHqaO9PRc8d4d35MADx0rz-MX1B5Umxc7r5ypEVsZQ"
-
-
-
-
-
 
 

@@ -16,6 +16,8 @@ git clean -f 强制清除文件
 git checkout -f <branch>
 ```
 
+
+
 ## 2、Git撤销add文件
 
 ```tex
@@ -24,6 +26,7 @@ git reset HEAD 撤销上一下全的add的文件
 git reset HEAD test.java 撤销某个文件
 git reset HEAD file 撤销某个文件夹中的所有文件
 ```
+
 
 ## 3、Git修改coomit信息
 
