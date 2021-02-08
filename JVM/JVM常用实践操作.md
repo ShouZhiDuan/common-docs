@@ -493,6 +493,22 @@ intx等其他基本都属于：key-value型参数
 
   > 年龄从小到大累计之和超过Survivor空间的百分比，默认是50%。比如说年龄1-5的所有新生代的对象累计之和是100。但是Survivor区的大小是200，这个时候从5年龄开始大于5的完后年龄都会晋升到老年代。
 
+  ```c
+  uint ageTable::compute_tenuring_threshold(size_t survivor_capacity) {
+  	//survivor_capacity是survivor空间的大小
+    size_t desired_survivor_size = (size_t)((((double) survivor_capacity)*TargetSurvivorRatio)/100);
+    size_t total = 0;
+    uint age = 1;
+    while (age < table_size) {
+      total += sizes[age];//sizes数组是每个年龄段对象大小
+      if (total > desired_survivor_size) break;
+      age++;
+    }
+    uint result = age < MaxTenuringThreshold ? age : MaxTenuringThreshold;
+  	...
+  }
+  ```
+
 - **总结**
 
   ```tex
