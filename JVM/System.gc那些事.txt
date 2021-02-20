@@ -1,0 +1,23 @@
+面试题一：在 Java 中，如何手动的让 GC 进行垃圾回收？
+
+这个方法其实有很多种。常见骚操作有 System.gc()，通过 jmap 来触发，或者通过 jvmti 做强制 GC 等。
+
+面试题二：System.gc 是 Full Gc 吗？
+
+System.gc 其实是做一次 full gc。这一点可以根据 DisableExplicitGC 的注释说明来看。Tells whether calling System.gc() does a full GC。
+
+面试题三：System.gc 的危害是什么？
+
+因为 System.gc 是一个 Full gc，所以会暂停整个进程。如果进程经常被频繁暂停，就要注意超时、并发等问题。
+
+面试题四：如何避免 System.gc ？
+
+通过 -XX:+DisableExplicitGC 禁掉 System.gc。
+
+面试题五：System.gc 的 Full Gc 如何做到暂停整个进程？
+
+Java 里面的 GC 有一个重要的线程 VMThread。在 jvm 里，这个线程会不断轮询它的队列，这个队列里主要是存一些 VM_operation 的动作，比如最常见的就是内存分配失败要求做 GC 操作的请求等，在对 gc 这些操作执行的时候会先将其他业务线程都进入到安全点，也就是这些线程从此不再执行任何字节码指令，只有当出了安全点的时候才让他们继续执行原来的指令，因此这其实就是我们说的 stop the world(STW)，整个进程相当于静止了。
+
+面试题六：并行的 Full GC 是否有了解？
+
+并行 Full GC 也同样会做 YGC 和 CMS GC，但是效率高就搞在 CMS GC 是走的 background 的，整个暂停的过程主要是 YGC、CMS_initMark、CMS_remark 几个阶段。background 顾名思义是在后台做的，也就是可以不影响正常的业务线程跑，触发条件比如说 old 的内存占比超过多少的时候就可能触发一次 background 式的 cms gc，这个过程会经历 CMS GC 的所有阶段，该暂停的暂停，该并行的并行，效率相对来说还比较高，毕竟有和业务线程并行的 gc 阶段；而 foreground 则不然，它发生的场景比如业务线程请求分配内存，但是内存不够了，于是可能触发一次 cms gc，这个过程就必须是要等内存分配到了线程才能继续往下面走的，因此整个过程必须是STW的，因此 CMS GC 整个过程都是暂停应用的，但是为了提高效率，它并不是每个阶段都会走的，只走其中一些阶段，这些省下来的阶段主要是并行阶段。
