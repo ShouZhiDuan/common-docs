@@ -15,6 +15,19 @@ mvn install:install-file \
 -Dversion=1.0.0  \
 -Dpackaging=jar
 
+
+本地jar打包本地maven仓库
+mvn install:install-file -Dfile=springfox-swagger-ui-2.9.2.jar  -DgroupId=io.springfox  -DartifactId=nvx-springfox-swagger-ui  -Dversion=2.9.2  -Dpackaging=jar
+
+将本地的jar发布到私服
+mvn deploy:deploy-file -Dmaven.test.skip=true -Dfile=C:\Users\dev\Desktop\调试文件\swagger\springfox-swagger-ui-2.9.2\springfox-swagger-ui-2.9.2.jar -DgroupId=io.springfox -DartifactId=nvx-springfox-swagger-ui -Dversion=2.9.2 -Dpackaging=jar -DrepositoryId=Releases -Durl=http://192.168.10.16:8081/repository/maven-releases/ --settings F:\java-soft\apache-maven-3.5.2\conf\settings.xml 
+
+mvn deploy:deploy-file -Dmaven.test.skip=true -Dfile=C:\Users\dev\Desktop\调试文件\swagger\springfox-swagger-ui-2.9.2\springfox-swagger-ui-2.9.2.jar -DgroupId=io.springfox -DartifactId=nvx-springfox-swagger-ui -Dversion=2.9.2 -Dpackaging=jar -DrepositoryId=Releases -Durl=http://192.168.10.16:8081/repository/maven-releases/
+
+
+
+
+
 5、缺少依赖包，强制更新依赖命令：
 mvn clean install -e -U -Dmaven.test.skip=true
 
